@@ -4,10 +4,12 @@ You can use it to handle store creation and management in your next.js app on bo
 
 ### Main idea
 **This package is motivated by next-redux-wrapper package, but has difference in the way it handles store hydration.
-It provides you with a way to create a rootReducer and add a HYDRATE action to it with your hydration logic.
+It do not uses useMemo hook for hydration since it is not working properly. It produces an issue like ```Cannot update a component  while rendering a different component```
+
+This package provides you with a way to create a rootReducer and add a HYDRATE action to it with your hydration logic.
 Wrapper will create a store for your serverSideProps so you'll be able to use dispatch action on server, and then it will pass
 store's state to the client side. 
-On client side it will create a new store and pass it to the app or apply hydration if store already exists.
+On client side it will create a new store and pass it to the app or apply hydration if store already exists after component mounts.
 After hydration completes it will pass hydrated flag via context that can be accessed by HydrationContext.
 This can be used optionally via useContext react hook.**
 
