@@ -1,0 +1,68 @@
+{
+  "name": "wrapper-next-with-redux",
+  "version": "1.0.0",
+  "description": "redux wrapper for next.js app based on functional components",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "repository": "git@github.com:Vladimir5161/wrapper-next-with-redux.git",
+  "author": "napoleon520@gmail.com",
+  "license": "MIT",
+  "baseUrl": "./src",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "@types/lodash": "^4.17.10",
+    "@types/redux": "^3.6.0",
+    "lodash": "^4.17.21",
+    "next": "^14.2.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "redux": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.10",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/redux": "^3.6.0",
+    "browserify-zlib": "^0.2.0",
+    "lodash": "^4.17.21",
+    "next": "^14.2.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "redux": "^5.0.1",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "prepare": "npm run build",
+    "pack": "npm pack"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/types/*.d.ts"
+    },
+    "./HOC/*": {
+      "import": "./dist/HOC/*.js",
+      "require": "./dist/HOC/*.js",
+      "types": "./dist/types/*.d.ts"
+    },
+    "./hooks/*": {
+      "import": "./dist/hooks/*.js",
+      "require": "./dist/hooks/*.js",
+      "types": "./dist/types/*.d.ts"
+    }
+  },
+  "dependencies": {
+    "stream-browserify": "^3.0.0"
+  }
+}

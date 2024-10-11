@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2021", // Updated from ES5 for modern JavaScript features
+    "module": "ESNext", // Aligns with Webpack's 'module' setting
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": false,
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "lib": [
+      "ES2021",
+      "ESNext",        // Includes Promise and other ES2015 features
+      "DOM"            // If you're working in a browser environment
+    ],
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "types"]
+}
