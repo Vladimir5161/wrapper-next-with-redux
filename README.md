@@ -60,7 +60,7 @@ const hydrationAction = (state, action) => {
   return nextState;
 };
 
-const createStore = (preloadedState) => {
+const initializeStore = () => {
   return configureStore({
     reducer: createRootReducer(rootReducer, hydrationAction),
     middleware: (getDefaultMiddleware) =>
@@ -69,12 +69,11 @@ const createStore = (preloadedState) => {
         immutableCheck: false,
         serializableCheck: false,
       }).concat(sagaMiddleware),
-    preloadedState,
   });
 };
 
 export const withRedux = (getServerSidePropsFunc) =>
-  withReduxWrapper(getServerSidePropsFunc, createStore);
+  withReduxWrapper(getServerSidePropsFunc, initializeStore);
 ```
 **Usage of redux-saga and redux-persist is completely up to you and depends on you app design. You may use redux-thunk, and not use redux-persist at all**
 
@@ -95,7 +94,7 @@ export const getServerSideProps = withRedux(
 
 **Then you can use reduxWrapper to wrap your app in _app.js :**
 ```
-reduxWrapper(RootApp, createStore);
+reduxWrapper(RootApp, initializeStore);
 
 where initializeStore is a method you created in the previous step.
 ```
@@ -124,7 +123,7 @@ const persistConfig = {
   whitelist: ['me'],
   storage,
 };
-const createStore = (preloadedState, persistedReducer) => {
+const createStore = (persistedReducer) => {
   const sagaMiddleware = createSagaMiddleware();
   const _store = configureStore({
     reducer: persistedReducer,
@@ -134,7 +133,6 @@ const createStore = (preloadedState, persistedReducer) => {
         immutableCheck: false,
         serializableCheck: false,
       }).concat(sagaMiddleware),
-    preloadedState,
   });
   _store.sagaTask = sagaMiddleware.run(sagas);
   _store._persistor = persistStore(_store);
@@ -159,8 +157,8 @@ const persistedReducer = persistReducer(
   createRootReducer(rootReducer, hydrationAction),
 );
 
-export const initializeStore = (preloadedState) =>
-  createStore(preloadedState, persistedReducer);
+export const initializeStore = () =>
+  createStore(persistedReducer);
 
 export const withRedux = (getServerSidePropsFunc) =>
   withReduxWrapper(getServerSidePropsFunc, initializeStore);
