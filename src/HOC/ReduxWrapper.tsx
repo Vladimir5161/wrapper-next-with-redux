@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useRef } from 'react';
+import React, {createContext, useEffect, useRef, useState} from 'react';
 import { useRouter } from 'next/router';
 import isEqual from 'lodash/isEqual';
 import { Store, UnknownAction } from 'redux';
@@ -21,7 +21,7 @@ export function reduxWrapper<S, P>(
 ): React.FC<ReduxWrapperProps<S, P>> {
     return (props: ReduxWrapperProps<S, P>) => {
         const { initialReduxState } = props.pageProps;
-
+        const [componentUpdated, setComponentUpdated] = useState(false);
         const isHydrated = useRef<boolean>(false);
         const storeRef = useRef<Store<S, UnknownAction> | null>(null);
         if (!storeRef.current) {
@@ -48,10 +48,10 @@ export function reduxWrapper<S, P>(
                 const incomingState = initialReduxState;
                 if (!isEqual(currentState, incomingState)) {
                     store.dispatch(hydrate(incomingState));
+                    isHydrated.current = true;
+                    setComponentUpdated(!componentUpdated);
                 }
             }
-
-            isHydrated.current = true;
         }, [initialReduxState, store]);
 
         return (
