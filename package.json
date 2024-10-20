@@ -1,6 +1,6 @@
 {
   "name": "wrapper-next-with-redux",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "redux wrapper for next.js app based on functional components",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -28,7 +28,6 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/redux": "^3.6.0",
-    "browserify-zlib": "^0.2.0",
     "lodash": "^4.17.21",
     "next": "^14.2.10",
     "react": "^18.2.0",
@@ -62,7 +61,14 @@
       "types": "./dist/types/*.d.ts"
     }
   },
-  "dependencies": {
-    "stream-browserify": "^3.0.0"
-  }
+  "dependencies": {},
+  "keywords": [
+    "redux",
+    "next.js",
+    "react",
+    "redux-wrapper",
+    "functional-components",
+    "web",
+    "middleware"
+  ]
 }
