@@ -3,15 +3,15 @@
 You can use it to handle store creation and management in your next.js app on both server and client side.
 
 ### Main idea
-**This package is motivated by next-redux-wrapper package, but has difference in the way it handles store hydration.
+This package is motivated by next-redux-wrapper package, but has difference in the way it handles store hydration.
 It do not uses useMemo hook for hydration since it is not working properly. It produces an issue like ```Cannot update a component  while rendering a different component```
 
 This package provides you with a way to create a rootReducer and add a HYDRATE action to it with your hydration logic.
-Wrapper will create a store for your serverSideProps so you'll be able to use dispatch action on server, and then it will pass
+Wrapper will create a store for your getServerSideProps or getStaticProps so you'll be able to use dispatch action on server, and then it will pass
 store's state to the client side. 
 On client side it will create a new store and pass it to the app or apply hydration if store already exists after component mounts.
 After hydration completes it will pass hydrated flag via context that can be accessed by HydrationContext.
-This can be used optionally via useContext react hook.**
+This can be used optionally via useContext react hook.
 
 ## Getting Started
 
@@ -77,7 +77,7 @@ export const withRedux = (getServerSidePropsFunc) =>
 ```
 **Usage of redux-saga and redux-persist is completely up to you and depends on you app design. You may use redux-thunk, and not use redux-persist at all**
 
-**Then you can use withRedux method in you components and pages to wrap getServerSideProps:**
+**Then you can use withRedux method in you components and pages to wrap getServerSideProps or getStaticProps:**
 ```
 export const getServerSideProps = withRedux(
   async ({ store, your_other_props(req, res, etc..) }) => {
